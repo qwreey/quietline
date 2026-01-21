@@ -35,7 +35,7 @@ QTM_LAYOUT=(
     HEAD     "%i{%F{240}%}▍"
     SSH      " %e{qtheme-ssh%}"
 
-    USERNAME " %i{%F{196}%}%l{%F{160}%}$USER"
+    USERNAME " %i{%F{196}%}%l{%F{160}%}%e{qtheme-username%}"
     DELIMIT  " %i{$bold%}@ "
     HOSTNAME "%i{%F{214}%}%l{%F{172}%}%e{qtheme-hostname%}"
     DELIMIT  " %i{$bold%}: "
@@ -71,13 +71,22 @@ qtheme-ssh() {
     print -n "%i{%F{148}%}=>"
 }
 
+qtheme-username() {
+    if [[ ! -z "$QTM_USERNAME_OVERRIDE" ]]; then
+        print -n "$QTM_USERNAME_OVERRIDE"
+    else
+        print -n "$USER"
+    fi
+}
 qtheme-hostname() {
     if [[ ! -z "$QTM_HOSTNAME_OVERRIDE" ]]; then
         print -n "$QTM_HOSTNAME_OVERRIDE"
+    elif [[ ! -z "$HOST" ]]; then
+        print -n "$HOST"
+    elif which hostname &> /dev/null; then
+        hostname -s
     elif which hostnamectl &> /dev/null; then
         hostnamectl --transient
-    else
-        hostname -s
     fi
 }
 
