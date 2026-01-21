@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 reset=$'\e[0m'
 bold=$'\e[1m'
 faint=$'\e[2m';     no_faint_bold=$'\e[22m'
@@ -17,6 +19,7 @@ invert=$'\e[7m';    no_invert=$'\e[27m'
 # custom function here
 
 # layout
+QTM_HOSTNAME_OVERRIDE="" # If you have same hostname pcs a lot, you can add nickname for classify each other
 QTM_TOPLINE="▁"
 QTM_PROMPT="%{%F{240}%}▍%{%F{064}%}%(#.#.%(!.!.$))%{%f%} "
 QTM_PROMPT_QUOTE="…"
@@ -65,15 +68,17 @@ qtheme-ssh() {
     if [[ -z "$SSH_TTY$SSH_CONNECTION$SSH_CLIENT" ]]; then
         return 1
     fi
-    echo "%i{%F{148}%}=>"
+    print -n "%i{%F{148}%}=>"
 }
 
 qtheme-hostname() {
-	if which hostnamectl &> /dev/null; then
-		hostnamectl --transient
-	else
-		hostname -s
-	fi
+    if [[ ! -z "$QTM_HOSTNAME_OVERRIDE" ]]; then
+        print -n "$QTM_HOSTNAME_OVERRIDE"
+    elif which hostnamectl &> /dev/null; then
+        hostnamectl --transient
+    else
+        hostname -s
+    fi
 }
 
 qtheme-git-branch() {
@@ -81,11 +86,11 @@ qtheme-git-branch() {
     ref=$(git symbolic-ref --quiet HEAD 2> /dev/null)
     local err=$?
     if [[ $err == 0 ]]; then
-        echo ${ref#refs/heads/} # remove "refs/heads/" to get branch
+        print -n ${ref#refs/heads/} # remove "refs/heads/" to get branch
     else # not on a branch
         [[ $err == 128 ]] && return 1 # not a git repo
         ref=$(git rev-parse --short HEAD 2> /dev/null) || return 1
-        echo ":${ref}" # hash prefixed to distingush from branch
+        print -n ":${ref}" # hash prefixed to distingush from branch
     fi
 }
 
