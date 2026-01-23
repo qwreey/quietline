@@ -45,7 +45,7 @@ QTM_LAYOUT=(
 	STOPWATCH "%t{ %F{226}%e{qtheme-stopwatch%} taken$reset%}"
 
 	HEAD     "%!w%i{%F{238}%}▍"
-	SSH      "%!w %e{qtheme-ssh%}"
+	SSH      "%!w %i{%F{148}%}%e{qtheme-ssh%}"
 
 	USERNAME "%!w %i{%F{196}%}%l{%F{160}%}%e{qtheme-username%}"
 	DELIMIT  "%!w %i{$bold%}@"
@@ -73,7 +73,7 @@ qtheme-ssh() {
 	if [[ -z "$SSH_TTY$SSH_CONNECTION$SSH_CLIENT" ]]; then
 		return 1
 	fi
-	print -n "%i{%F{148}%}=>"
+	print -n "=>"
 }
 
 qtheme-username() {
@@ -287,6 +287,8 @@ qtheme-exitcode() {
 cursor_up=$'\e[1F'
 cursor_show=$'\e[?25h'
 cursor_hide=$'\e[?25l'
+cursor_down=$'\e[1B'
+cursor_colhome=$'\e[1G'
 
 qtheme-get-width() {
 	print -n "${$(print -n "$1" | wc -L -)% -}"
