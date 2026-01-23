@@ -21,9 +21,9 @@ invert=$'\e[7m';    no_invert=$'\e[27m'
 # layout
 QTM_HOSTNAME_OVERRIDE="" # If you have same hostname pcs a lot, you can add nickname for classify each other
 QTM_TOPLINE="▁"
-QTM_PROMPT="%{%F{240}%}▍%{%F{064}%}%(#.#.%(!.!.$))%{%f%} "
-QTM_PROMPT_QUOTE="%{%F{240}%}▍%{%F{064}%}…%{%f%} "
-QTM_LAYOUT_BASE="%s{$reset%}%i{%F{245}%}%l{%F{240}%}"
+QTM_PROMPT="%{%F{238}%}▍%{%F{064}%}%(#.#.%(!.!.$))%{%f%} "
+QTM_PROMPT_QUOTE="%{%F{238}%}▍%{%F{064}%}…%{%f%} "
+QTM_LAYOUT_BASE="%s{$reset%}%i{%F{245}%}%l{%F{239}%}"
 QTM_LAYOUT=(
 	# ---- Extension methods ----
 	# %t{ content %}  : topbar slot, good for previous process informations
@@ -44,10 +44,10 @@ QTM_LAYOUT=(
 	EXITMEAN  "%t{ %F{196}(%e{qtheme-exitmeaning%})$reset%}"
 	STOPWATCH "%t{ %F{226}%e{qtheme-stopwatch%} taken$reset%}"
 
-	HEAD     "%!w%i{%F{240}%}▍"
+	HEAD     "%!w%i{%F{238}%}▍"
 	SSH      "%!w %e{qtheme-ssh%}"
 
-	USERNAME "%!w %i{%F{196}%}%l{$bold%F{160}%}%e{qtheme-username%}"
+	USERNAME "%!w %i{%F{196}%}%l{%F{160}%}%e{qtheme-username%}"
 	DELIMIT  "%!w %i{$bold%}@"
 	HOSTNAME "%!w %i{%F{214}%}%l{%F{172}%}%e{qtheme-hostname%}"
 	DELIMIT  "%!w %i{$bold%}: "
