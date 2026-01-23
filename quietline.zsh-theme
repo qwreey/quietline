@@ -524,7 +524,7 @@ qtheme-assemble() {
 		fi
 	done
 	if [[ ! -z $topi ]]; then
-		print -nP "\n$QTM_PROCESS_INFO_HEAD$topi$reset"
+		print -nP "$QTM_PROCESS_INFO_HEAD$topi$reset"
 	fi
 	print -nP "\n$line$reset"
 	print -nP "\n$info\n"
