@@ -524,10 +524,10 @@ qtheme-assemble() {
 		fi
 	done
 	if [[ ! -z $topi ]]; then
-		print -rP "$QTM_PROCESS_INFO_HEAD$topi$reset"
+		print -rP "$cursor_colhome$QTM_PROCESS_INFO_HEAD$topi$reset"
 	fi
-	print -rP "$line$reset"
-	print -rP "$info"
+	print -rP "$cursor_colhome$line$reset"
+	print -rP "$cursor_colhome$info"
 }
 
 qtheme-build-segment() {
