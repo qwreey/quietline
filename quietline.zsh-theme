@@ -23,7 +23,7 @@ QTM_HOSTNAME_OVERRIDE="" # If you have same hostname pcs a lot, you can add nick
 QTM_TOPLINE="▁"
 QTM_PROMPT="%{%F{238}%}▍%{%F{064}%}%(#.#.%(!.!.$))%{%f%} "
 QTM_PROMPT_QUOTE="%{%F{238}%}▍%{%F{064}%}…%{%f%} "
-QTM_LAYOUT_BASE="%s{$reset%}%i{%F{245}%}%l{%F{239}%}"
+QTM_LAYOUT_BASE="%s{$reset%}%i{%F{246}%}%l{%F{239}%}"
 QTM_LAYOUT=(
 	# ---- Extension methods ----
 	# %t{ content %}  : topbar slot, good for previous process informations
