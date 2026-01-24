@@ -66,7 +66,7 @@ QTM_EXITCODE_ZERO="hide" # show | hide
 
 QTM_OVERWRITE='off' # on | off
 
-[[ -e "${0:A:h}" ]] && source "${0:A:h}/override.zsh"
+[[ -e "${0:A:h}/override.zsh" ]] && source "${0:A:h}/override.zsh"
 
 # --------------------------------------------
 
