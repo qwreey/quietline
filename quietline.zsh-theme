@@ -19,7 +19,8 @@ invert=$'\e[7m';    no_invert=$'\e[27m'
 # custom function here
 
 # layout
-QTM_HOSTNAME_OVERRIDE="" # If you have same hostname pcs a lot, you can add nickname for classify each other
+# QTM_HOSTNAME_OVERRIDE="" # If you have same hostname pcs a lot, you can add nickname for classify each other
+# QTM_USERNAME_OVERRIDE=""
 QTM_TOPLINE="▁"
 QTM_PROMPT="%{%F{238}%}▍%{%F{064}%}%(#.#.%(!.!.$))%{%f%} "
 QTM_PROMPT_QUOTE="%{%F{238}%}▍%{%F{064}%}…%{%f%} "
@@ -65,6 +66,8 @@ QTM_EXITCODE_ZERO="hide" # show | hide
 
 QTM_OVERWRITE='off' # on | off
 
+[[ -e "${0:A:h}" ]] && source "${0:A:h}/override.zsh"
+
 # --------------------------------------------
 
 # -- Functions
@@ -76,11 +79,19 @@ qtheme-ssh() {
 	print -n "=>"
 }
 
+QTM_USERNAME_CACHE=''
 qtheme-username() {
 	if [[ ! -z "$QTM_USERNAME_OVERRIDE" ]]; then
 		print -n "$QTM_USERNAME_OVERRIDE"
-	else
+	elif [[ ! -z $USER ]]; then
 		print -n "$USER"
+	elif [[ ! -z $USERNAME ]]; then
+		print -n "$USERNAME"
+	elif [[ ! -z $QTM_USERNAME_CACHE ]]; then
+		print -n "$QTM_USERNAME_CACHE"
+	elif which whoami &> /dev/null; then
+		QTM_USERNAME_CACHE="$(whoami)"
+		print -n "$QTM_USERNAME_CACHE"
 	fi
 }
 
