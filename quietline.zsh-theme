@@ -306,19 +306,19 @@ qtheme-get-width() {
 }
 
 qtheme-findup-first() {
-        local path_
-        path_="${PWD}"
-        if [ -e "${path_}/${1-}" ]; then
-                printf "%s\n" "${path_}/${1-}"
+	local path_
+	path_="${PWD}"
+	if [ -e "${path_}/${1-}" ]; then
+			printf "%s\n" "${path_}/${1-}"
+	return 0
+	fi
+	while [ "${path_}" != "" ] && [ "${path_}" != '.' ]; do
+			path_=${path_%/*}
+			if [ -e "${path_}/${1-}" ]; then
+					printf "%s\n" "${path_}/${1-}"
 		return 0
-        fi
-        while [ "${path_}" != "" ] && [ "${path_}" != '.' ]; do
-                path_=${path_%/*}
-                if [ -e "${path_}/${1-}" ]; then
-                        printf "%s\n" "${path_}/${1-}"
-			return 0
-                fi
-        done
+			fi
+	done
 	return 1
 }
 
@@ -736,8 +736,8 @@ qtheme-update-prompt() {
 	QTM_ERR="$?"
 	if [[ $QTM_CMD_NUM == $QTM_CMD_NUM_PREV ]]; then
 		QTM_ERR=0
+		QTM_CMD_TIME=0
 	fi
-	QTM_CMD_TIME=0
 
 	# Old & Slow method
 	# local segment=''
@@ -760,4 +760,3 @@ qtheme-update-prompt() {
 	PS2="$QTM_PROMPT_QUOTE"
 	QTM_CMD_NUM_PREV=$QTM_CMD_NUM
 }
-
